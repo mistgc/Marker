@@ -11,28 +11,30 @@
 }
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: theme(colors.white);
+    --foreground: theme(colors.black);
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: theme(colors.neutral.500);
 
-    --popover: 0 0% 100%;
+    --popover: theme(colors.white);
     --popover-foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --border: 214.3 31.8% 91.4%;
+
+    --border: theme(colors.gray.200);
     --input: 214.3 31.8% 91.4%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: theme(colors.neutral.700);
+    --primary-foreground: theme(colors.white);
 
-    --secondary: 210 40% 96.1%;
+    --secondary: theme(colors.neutral.100);
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --accent: 210 40% 96.1%;
+    --accent: theme(colors.neutral.200);
     --accent-foreground: ;
 
     --destructive: 0 84.2% 60.2%;
@@ -41,37 +43,57 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+
+    .code {
+      background-color: #6161611a;
+      color: #616161;
+    }
+
+    input {
+      @apply text-black;
+      @apply bg-white;
+    }
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: theme(colors.neutral.800);
+    --foreground: theme(colors.white);
 
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: theme(colors.neutral.500);
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: theme(colors.zinc.900);
+    --popover-foreground: theme(colors.neutral.100);
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
+    --border: theme(colors.neutral.700);
+    --input: theme(colors.neutral.500);
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: theme(colors.neutral.300);
+    --primary-foreground: theme(colors.neutral.800);
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: theme(colors.neutral.800);
     --secondary-foreground: 210 40% 98%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: ;
+    --accent: theme(colors.neutral.700);
+    /* --accent-foreground: ; */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 85.7% 97.3%;
 
-    --ring: 217.2 32.6% 17.5%;
+    --ring: theme(colors.white);
+
+    .code {
+      background-color: #94929229;
+      color: #949292;
+    }
+
+    input {
+      @apply text-white;
+      @apply bg-neutral-700;
+    }
   }
 }
 
@@ -79,23 +101,20 @@
   * {
     @apply border-border;
   }
-  body {
-    /* @apply bg-background text-foreground; */
-  }
 }
 
 body {
   max-width: 100vw;
   max-height: 100vh;
+  @apply bg-background;
+  @apply text-primary;
 }
 
 .ant-modal-content {
   border-radius: 0px !important;
 }
 .code {
-  background-color: #6161611a;
   border-radius: 0.25em;
-  color: #616161;
   font-size: 0.9rem;
   padding: 0.25em;
   font-weight: 400;
@@ -217,14 +236,15 @@ p,
 .ProseMirror p {
   font-size: 18px;
   line-height: 1.8rem;
-  color: #404040;
+  @apply text-primary;
 }
 .ProseMirror blockquote {
-  border-left: 3px solid rgba(13, 13, 13, 0.1);
+  @apply border-l-[3px];
+  @apply border-muted-foreground;
   padding-left: 1rem;
 }
 .ProseMirror strong {
-  color: black;
+  @apply text-primary;
 }
 
 .ProseMirror h1,
@@ -319,7 +339,6 @@ p,
 
 @keyframes slider {
   from {
-    /* transform: translateY(200px); */
     transform: scale(0.95);
   }
   to {
@@ -333,11 +352,13 @@ p,
 ::-webkit-scrollbar {
   height: 5px;
   width: 5px;
-  @apply bg-neutral-200;
+  @apply bg-accent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-400;
+  @apply bg-primary;
+  opacity: 0.6;
+
   -webkit-border-radius: 1ex;
 }
 
@@ -357,7 +378,7 @@ p,
     td,
     th {
       border: 1.5px solid;
-      @apply border-neutral-200;
+      @apply border-gray-300;
       box-sizing: border-box;
       min-width: 60px;
       padding: 3px 5px;
@@ -370,7 +391,7 @@ p,
     }
 
     th {
-      @apply bg-neutral-200/50;
+      @apply bg-accent;
       font-weight: bold;
       text-align: left;
     }
@@ -401,4 +422,17 @@ p,
       margin: 0;
     }
   }
+}
+
+textarea {
+  background: transparent;
+  @apply text-primary;
+}
+textarea::placeholder,
+.tiptap p.is-editor-empty:first-child::before {
+  @apply text-neutral-500 !important;
+  opacity: 0.5;
+}
+li::marker {
+  @apply text-primary;
 }

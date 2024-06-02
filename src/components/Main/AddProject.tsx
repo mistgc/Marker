@@ -15,7 +15,7 @@ import {
 import useStore from "@/store/appStore";
 
 const defaultClass =
-  "hover:bg-black/80 p-2 w-full rounded-md bg-black text-white font-medium";
+  "p-2 w-full rounded-md bg-primary text-secondary font-medium";
 interface props {
   children: ReactNode;
   className?: string;
@@ -74,6 +74,7 @@ const AddProject: React.FC<props> = ({
             <Input
               id="name"
               placeholder="Project name"
+              className="!bg-background"
               ref={nameRef}
               required
             />
@@ -91,7 +92,7 @@ const AddProject: React.FC<props> = ({
               >
                 Select directory
               </Button>
-              {dir && <p className="text-sm text-neutral-700 mt-2">{dir}</p>}
+              {dir && <p className="text-sm mt-2">{dir}</p>}
             </div>
           </div>
         </div>
